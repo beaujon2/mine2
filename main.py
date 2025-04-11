@@ -1,6 +1,8 @@
 import logging
 from fastapi import FastAPI, Request
 from aiogram import Bot, Dispatcher
+from aiogram.utils.markdown import hbold
+from aiogram.client.default import DefaultBotProperties
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import Update
 from bot import router  # handlers du bot
