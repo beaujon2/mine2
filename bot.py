@@ -13,15 +13,9 @@ from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_applicati
 import uvicorn
 
 user_last_signal_time = {}
-
-
-
-
-
-
 router = Router()
-bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
-dp = Dispatcher()
+# bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
+# dp = Dispatcher()
 CHANNEL_ID = "@mine1wgroup"
 image_path = "photo.jpg"
 welcome_message = """<b><i>⚙️ les nouvelles technologies ont permis d'obtenir des cotes futures directement à partir du jeu mine</i></b>
