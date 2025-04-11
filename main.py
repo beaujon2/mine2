@@ -5,8 +5,8 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import Update
 from bot import router  # handlers du bot
 
-TOKEN = "TON_TOKEN_BOT"
-WEBHOOK_PATH = "/webhook"
+TOKEN = "7500348646:AAHlWacjJCBP0NYDViHKl4sLLnbVkOAGYXs"
+WEBHOOK_PATH = f"/webhook/{TOKEN}"
 WEBHOOK_URL = "https://ton-projet.onrender.com" + WEBHOOK_PATH
 
 # Initialisation du bot et dispatcher
