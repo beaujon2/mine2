@@ -7,7 +7,7 @@ from bot import router  # handlers du bot
 
 TOKEN = "7500348646:AAHlWacjJCBP0NYDViHKl4sLLnbVkOAGYXs"
 WEBHOOK_PATH = f"/webhook/{TOKEN}"
-WEBHOOK_URL = "https://ton-projet.onrender.com" + WEBHOOK_PATH
+WEBHOOK_URL = "https://mine2-lksn.onrender.com" + WEBHOOK_PATH
 
 # Initialisation du bot et dispatcher
 bot = Bot(token=TOKEN, parse_mode="HTML")
