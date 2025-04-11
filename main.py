@@ -12,7 +12,7 @@ WEBHOOK_PATH = f"/webhook/{TOKEN}"
 WEBHOOK_URL = "https://mine2-lksn.onrender.com" + WEBHOOK_PATH
 
 # Initialisation du bot et dispatcher
- bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
+bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
 dp = Dispatcher(storage=MemoryStorage())
 dp.include_router(router)
 
