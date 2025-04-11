@@ -18,8 +18,7 @@ user_last_signal_time = {}
 
 
 
-TOKEN = "7500348646:AAHlWacjJCBP0NYDViHKl4sLLnbVkOAGYXs"
-WEBHOOK_PATH = f"/webhook/{TOKEN}"
+
 router = Router()
 bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
 dp = Dispatcher()
