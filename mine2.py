@@ -1,12 +1,16 @@
 import asyncio
 import random
 import logging
-from aiogram import Bot, Dispatcher, types , F
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton,  FSInputFile
+from aiogram import Bot, Dispatcher, types , F , Router
+from aiogram.types import Update, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton,  FSInputFile
 from aiogram.filters import CommandStart
 from aiogram.utils.markdown import hbold
 from aiogram.client.default import DefaultBotProperties
 from datetime import datetime, timedelta
+from fastapi import FastAPI, Request
+from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_application
+import uvicorn
 
 user_last_signal_time = {}
 
@@ -15,10 +19,12 @@ user_last_signal_time = {}
 
 
 TOKEN = "7500348646:AAHlWacjJCBP0NYDViHKl4sLLnbVkOAGYXs"
+WEBHOOK_PATH = f"/webhook/{TOKEN}"
+router = Router()
 bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
 dp = Dispatcher()
 CHANNEL_ID = "@mine1wgroup"
-image_path = "images\\photo.jpg"
+image_path = "photo.jpg"
 welcome_message = """<b><i>⚙️ les nouvelles technologies ont permis d'obtenir des cotes futures directement à partir du jeu mine</i></b>
 
 ⚙️ administrator - @Minepro1w 🎰
@@ -62,7 +68,7 @@ def generate_grid():
         grid[row][col] = "⭐"
     return "\n".join("".join(row) for row in grid)
 
-@dp.message(lambda message: message.text == "🎯 Get Signal")
+@router.message(lambda message: message.text == "🎯 Get Signal")
 async def send_signal(message: types.Message):
 
     user_id = message.from_user.id
@@ -93,7 +99,7 @@ async def send_signal(message: types.Message):
     await message.answer(signal_text, parse_mode="HTML", reply_markup=keyboard)
 # await message.answer(signal_text, reply_markup=kb)
 
-@dp.callback_query(lambda c: c.data == "how_to_play")
+@router.callback_query(lambda c: c.data == "how_to_play")
 async def how_to_play(callback: types.CallbackQuery):
     keyboard = InlineKeyboardMarkup(
         inline_keyboard=[
@@ -108,7 +114,7 @@ async def how_to_play(callback: types.CallbackQuery):
             parse_mode="HTML",
             reply_markup= keyboard
     )
-@dp.message()
+@router.message()
 async def start_command(message: types.Message):
 
     is_subscribed = await check_subscription(message.from_user.id)
@@ -135,7 +141,7 @@ async def start_command(message: types.Message):
 
     # await callback.message.edit_caption("Appuie sur '🎯 Get Signal' pour recevoir un signal.", reply_markup=kb)
 # vérifier l’abonnement
-@dp.callback_query(F.data == "check_sub")
+@router.callback_query(F.data == "check_sub")
 async def check_subscription_callback(callback: types.CallbackQuery):
     is_subscribed = await check_subscription(callback.from_user.id)
     if is_subscribed:
