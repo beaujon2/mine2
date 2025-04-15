@@ -1,7 +1,7 @@
 import asyncio
 import random
 import logging
-from aiogram import Bot, Dispatcher, types , F , Router
+from aiogram import types, F, Router
 from aiogram.types import Update, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton,  FSInputFile
 from aiogram.filters import CommandStart
 from aiogram.utils.markdown import hbold
@@ -12,6 +12,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_application
 import uvicorn
 
+bot = None  # Ceci sera défini dans main.py
 user_last_signal_time = {}
 router = Router()
 # bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
@@ -100,13 +101,13 @@ async def how_to_play(callback: types.CallbackQuery):
                                   ]
     )
     photo = FSInputFile(image_path)
-    await bot.send_photo(
-            chat_id=message.chat.id,
-            photo=photo,
-            caption=welcome_message,
-            parse_mode="HTML",
-            reply_markup= keyboard
-    )
+   await callback.message.answer_photo(
+    photo=photo,
+    caption=welcome_message,
+    parse_mode="HTML",
+    reply_markup=keyboard
+)
+
 @router.message()
 async def start_command(message: types.Message):
 
@@ -124,11 +125,11 @@ async def start_command(message: types.Message):
     args = message.text.split()
     photo = FSInputFile(image_path)
    
-    await bot.send_photo(
-        chat_id=message.chat.id,
-        photo=photo,
-        caption=welcome_message,
-        parse_mode="HTML"
+    await callback.message.answer_photo(
+    photo=photo,
+    caption=welcome_message,
+    parse_mode="HTML",
+    reply_markup=keyboard
     )
     await message.answer("Appuie sur '🎯 Get Signal' pour recevoir un signal.", reply_markup=kb)
 
