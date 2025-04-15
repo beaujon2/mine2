@@ -95,18 +95,18 @@ async def send_signal(message: types.Message):
 
 @router.callback_query(lambda c: c.data == "how_to_play")
 async def how_to_play(callback: types.CallbackQuery):
-    keyboard = InlineKeyboardMarkup(
-        inline_keyboard=[
-            [InlineKeyboardButton(text="🔗 LIEN D'INSCRIPTION", url="https://1wrjmw.com/v3/2158/1win-mines?p=qn1x")]
-                                  ]
-    )
+    # keyboard = InlineKeyboardMarkup(
+    #     inline_keyboard=[
+    #         [InlineKeyboardButton(text="🔗 LIEN D'INSCRIPTION", url="https://1wrjmw.com/v3/2158/1win-mines?p=qn1x")]
+    #                               ]
+    # )
     photo = FSInputFile(image_path)
     await bot.send_photo(
         chat_id=callback.message.chat.id,
         photo=photo,
         caption=welcome_message,
         parse_mode="HTML",
-        reply_markup=keyboard
+        # reply_markup=keyboard
 )
 
 @router.message()
@@ -130,7 +130,7 @@ async def start_command(message: types.Message):
     photo=photo,
     caption=welcome_message,
     parse_mode="HTML",
-    reply_markup=keyboard
+    # reply_markup=keyboard
     )
     await message.answer("Appuie sur '🎯 Get Signal' pour recevoir un signal.", reply_markup=kb)
 
