@@ -101,11 +101,12 @@ async def how_to_play(callback: types.CallbackQuery):
                                   ]
     )
     photo = FSInputFile(image_path)
-   await callback.message.answer_photo(
-    photo=photo,
-    caption=welcome_message,
-    parse_mode="HTML",
-    reply_markup=keyboard
+    await bot.send_photo(
+        chat_id=callback.message.chat.id,
+        photo=photo,
+        caption=welcome_message,
+        parse_mode="HTML",
+        reply_markup=keyboard
 )
 
 @router.message()
