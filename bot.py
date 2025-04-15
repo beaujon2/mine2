@@ -126,7 +126,7 @@ async def start_command(message: types.Message):
     args = message.text.split()
     photo = FSInputFile(image_path)
    
-    await callback.message.answer_photo(
+    await message.answer_photo(
     photo=photo,
     caption=welcome_message,
     parse_mode="HTML",
