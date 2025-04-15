@@ -6,6 +6,9 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import Update
 from bot import router  # handlers du bot
+import bot as bot_module
+bot_module.bot = bot
+
 
 TOKEN = "7500348646:AAHlWacjJCBP0NYDViHKl4sLLnbVkOAGYXs"
 WEBHOOK_PATH = f"/webhook/{TOKEN}"
